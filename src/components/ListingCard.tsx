@@ -33,9 +33,9 @@ export default function ListingCard({ listing }: ListingCardProps) {
     <>
       <article
         onClick={() => setIsOpen(true)}
-        className="group relative flex cursor-pointer flex-col overflow-hidden rounded-xl border border-white/70 bg-white/90 shadow-md shadow-teal-900/5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-900/10 sm:rounded-2xl"
+        className="group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border border-white/70 bg-white/90 shadow-md shadow-teal-900/5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-900/10 sm:rounded-2xl"
       >
-        <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+        <div className="relative aspect-[4/3] shrink-0 overflow-hidden bg-slate-100">
           <ListingImage src={listing.image_url} alt={listing.title} />
           <span
             className={`absolute left-1.5 top-1.5 rounded-md px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide sm:left-3 sm:top-3 sm:rounded-lg sm:px-3 sm:py-1 sm:text-xs ${
@@ -49,17 +49,15 @@ export default function ListingCard({ listing }: ListingCardProps) {
         </div>
 
         <div className="flex flex-1 flex-col p-2.5 pr-10 pb-10 sm:p-5 sm:pr-16 sm:pb-14">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-teal-600 sm:text-xs">
+          <p className="shrink-0 text-[10px] font-semibold uppercase tracking-wider text-teal-600 sm:text-xs">
             {locationName}
           </p>
-          <h3 className="mt-0.5 text-xs font-bold text-slate-800 line-clamp-2 sm:mt-1 sm:text-lg">
+          <h3 className="mt-0.5 min-h-[2.5em] text-xs font-bold text-slate-800 line-clamp-2 sm:mt-1 sm:min-h-[3.25rem] sm:text-lg">
             {listing.title}
           </h3>
-          {listing.description && (
-            <p className="mt-1 hidden flex-1 text-sm leading-relaxed text-slate-500 line-clamp-2 sm:mt-2 sm:block">
-              {listing.description}
-            </p>
-          )}
+          <p className="mt-1 min-h-[2.5em] flex-1 text-[10px] leading-relaxed text-slate-500 line-clamp-2 sm:mt-2 sm:min-h-[2.75rem] sm:text-sm">
+            {listing.description || "\u00A0"}
+          </p>
         </div>
 
         <a

@@ -27,6 +27,20 @@ body {
   );
 }
 
+.site-bg-photo {
+  background-attachment: fixed;
+  background-position: center center;
+}
+
+.site-bg-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.3) 45%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

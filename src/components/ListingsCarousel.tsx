@@ -71,7 +71,7 @@ export default function ListingsCarousel({ listings }: ListingsCarouselProps) {
   const showArrows = canScrollLeft || canScrollRight;
 
   return (
-    <div className="mt-10 flex items-center gap-1 sm:gap-4">
+    <div className="mt-10 flex items-stretch gap-1 sm:gap-4">
       <button
         type="button"
         onClick={() => scroll("left")}
@@ -86,13 +86,13 @@ export default function ListingsCarousel({ listings }: ListingsCarouselProps) {
 
       <div
         ref={scrollRef}
-        className="scrollbar-hide flex flex-1 gap-2 overflow-x-auto scroll-smooth snap-x snap-mandatory sm:gap-4 md:gap-6"
+        className="scrollbar-hide flex flex-1 items-stretch gap-2 overflow-x-auto scroll-smooth snap-x snap-mandatory sm:gap-4 md:gap-6"
       >
         {listings.map((listing) => (
           <div
             key={listing.id}
             data-listing-card
-            className="w-[calc(33.333%-0.35rem)] min-w-0 flex-shrink-0 snap-start sm:w-[calc(33.333%-0.7rem)] md:w-[calc(33.333%-1rem)]"
+            className="flex w-[calc(33.333%-0.35rem)] min-w-0 flex-shrink-0 snap-start sm:w-[calc(33.333%-0.7rem)] md:w-[calc(33.333%-1rem)]"
           >
             <ListingCard listing={listing} />
           </div>

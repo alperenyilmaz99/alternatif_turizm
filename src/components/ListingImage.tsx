@@ -4,12 +4,19 @@ import { canUseNextImage, resolveListingImageUrl } from "@/lib/image";
 interface ListingImageProps {
   src: string | null | undefined;
   alt: string;
+  className?: string;
+  sizes?: string;
 }
 
-function ImagePlaceholder() {
+function ImagePlaceholder({ large = false }: { large?: boolean }) {
   return (
     <div className="flex h-full items-center justify-center text-slate-400">
-      <svg className="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg
+        className={large ? "h-24 w-24" : "h-16 w-16"}
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -21,11 +28,16 @@ function ImagePlaceholder() {
   );
 }
 
-export default function ListingImage({ src, alt }: ListingImageProps) {
+export default function ListingImage({
+  src,
+  alt,
+  className = "object-cover transition-transform duration-500 group-hover:scale-105",
+  sizes = "(max-width: 768px) 100vw, 33vw",
+}: ListingImageProps) {
   const resolved = resolveListingImageUrl(src);
 
   if (!resolved) {
-    return <ImagePlaceholder />;
+    return <ImagePlaceholder large={sizes.includes("800")} />;
   }
 
   if (canUseNextImage(resolved)) {
@@ -34,19 +46,18 @@ export default function ListingImage({ src, alt }: ListingImageProps) {
         src={resolved}
         alt={alt}
         fill
-        className="object-cover transition-transform duration-500 group-hover:scale-105"
-        sizes="(max-width: 768px) 100vw, 33vw"
+        className={className}
+        sizes={sizes}
       />
     );
   }
 
   return (
-    // Harici görsel linkleri için standart img kullan
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={resolved}
       alt={alt}
-      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+      className={`absolute inset-0 h-full w-full ${className}`}
     />
   );
 }

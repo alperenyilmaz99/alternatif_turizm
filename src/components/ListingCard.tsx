@@ -1,7 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import type { Listing } from "@/types/database";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { formatListingTypeLabel } from "@/lib/listings";
 import ListingImage from "./ListingImage";
+import ListingModal from "./ListingModal";
 
 interface ListingCardProps {
   listing: Listing;
@@ -21,47 +25,58 @@ function WhatsAppIcon() {
 }
 
 export default function ListingCard({ listing }: ListingCardProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const locationName = listing.locations?.name ?? "Türkiye";
   const whatsappUrl = getWhatsAppUrl(listing);
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/70 bg-white/90 shadow-md shadow-teal-900/5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-900/10">
-      <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-        <ListingImage src={listing.image_url} alt={listing.title} />
-        <span
-          className={`absolute left-3 top-3 rounded-lg px-3 py-1 text-xs font-bold uppercase tracking-wide ${
-            listing.listing_type === "kiralama"
-              ? "bg-blue-600 text-white"
-              : "bg-amber-500 text-white"
-          }`}
-        >
-          {formatListingTypeLabel(listing.listing_type)}
-        </span>
-      </div>
-
-      <div className="flex flex-1 flex-col p-5 pr-16 pb-14">
-        <p className="text-xs font-semibold uppercase tracking-wider text-teal-600">
-          {locationName}
-        </p>
-        <h3 className="mt-1 text-lg font-bold text-slate-800 line-clamp-2">
-          {listing.title}
-        </h3>
-        {listing.description && (
-          <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-500 line-clamp-2">
-            {listing.description}
-          </p>
-        )}
-      </div>
-
-      <a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="WhatsApp ile iletişime geç"
-        className="absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/30 transition hover:scale-110 hover:bg-[#20bd5a]"
+    <>
+      <article
+        onClick={() => setIsOpen(true)}
+        className="group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/70 bg-white/90 shadow-md shadow-teal-900/5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-900/10"
       >
-        <WhatsAppIcon />
-      </a>
-    </article>
+        <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+          <ListingImage src={listing.image_url} alt={listing.title} />
+          <span
+            className={`absolute left-3 top-3 rounded-lg px-3 py-1 text-xs font-bold uppercase tracking-wide ${
+              listing.listing_type === "kiralama"
+                ? "bg-blue-600 text-white"
+                : "bg-amber-500 text-white"
+            }`}
+          >
+            {formatListingTypeLabel(listing.listing_type)}
+          </span>
+        </div>
+
+        <div className="flex flex-1 flex-col p-5 pr-16 pb-14">
+          <p className="text-xs font-semibold uppercase tracking-wider text-teal-600">
+            {locationName}
+          </p>
+          <h3 className="mt-1 text-lg font-bold text-slate-800 line-clamp-2">
+            {listing.title}
+          </h3>
+          {listing.description && (
+            <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-500 line-clamp-2">
+              {listing.description}
+            </p>
+          )}
+        </div>
+
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp ile iletişime geç"
+          onClick={(e) => e.stopPropagation()}
+          className="absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/30 transition hover:scale-110 hover:bg-[#20bd5a]"
+        >
+          <WhatsAppIcon />
+        </a>
+      </article>
+
+      {isOpen && (
+        <ListingModal listing={listing} onClose={() => setIsOpen(false)} />
+      )}
+    </>
   );
 }

@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS locations (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL UNIQUE,
   slug TEXT NOT NULL UNIQUE,
+  sort_order INT DEFAULT 0,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -46,46 +47,44 @@ CREATE POLICY "İlanlar herkese açık" ON listings FOR SELECT USING (true);
 -- Herkes başvuru gönderebilir
 CREATE POLICY "Herkes başvuru gönderebilir" ON submissions FOR INSERT WITH CHECK (true);
 
--- Örnek veriler
-INSERT INTO locations (name, slug) VALUES
-  ('Eliz', 'eliz'),
-  ('Afyon', 'afyon'),
-  ('Antalya', 'antalya'),
-  ('Bodrum', 'bodrum')
+-- Lokasyonlar (sıralama: Kızılcahamam, Bolu, Afyon, Diğer)
+INSERT INTO locations (name, slug, sort_order) VALUES
+  ('Kızılcahamam', 'kizilcahamam', 1),
+  ('Bolu', 'bolu', 2),
+  ('Afyon', 'afyon', 3),
+  ('Diğer', 'diger', 4)
 ON CONFLICT (slug) DO NOTHING;
 
-INSERT INTO listings (title, description, location_id, price, listing_type, image_url, featured)
+-- Örnek ilanlar
+INSERT INTO listings (title, description, location_id, listing_type, image_url, featured)
 SELECT
-  'Eliz Termal Resort - 1 Hafta',
-  '5 yıldızlı termal otelde 2+1 daire, tam donanımlı mutfak ve spa erişimi.',
+  'Eliz Termal',
+  'Kızılcahamam''da termal tatil imkanı. Spa, havuz ve konforlu konaklama seçenekleri.',
   l.id,
-  15000.00,
   'kiralama',
   'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80',
   true
-FROM locations l WHERE l.slug = 'eliz'
+FROM locations l WHERE l.slug = 'kizilcahamam'
 ON CONFLICT DO NOTHING;
 
-INSERT INTO listings (title, description, location_id, price, listing_type, image_url, featured)
+INSERT INTO listings (title, description, location_id, listing_type, image_url, featured)
 SELECT
-  'Afyon Grand Otel - Devremülk',
-  'Merkezi konumda, kaplıca ve havuz imkanlarıyla ideal tatil seçeneği.',
+  'Narven Termal',
+  'Bolu''da doğayla iç içe termal tatil. Aileler için ideal devremülk seçenekleri.',
   l.id,
-  850000.00,
+  'kiralama',
+  'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80',
+  true
+FROM locations l WHERE l.slug = 'bolu'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO listings (title, description, location_id, listing_type, image_url, featured)
+SELECT
+  'Özgül Termal',
+  'Afyon''da kaplıca ve termal tedavi imkanlarıyla huzurlu bir tatil deneyimi.',
+  l.id,
   'satış',
   'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80',
   true
 FROM locations l WHERE l.slug = 'afyon'
-ON CONFLICT DO NOTHING;
-
-INSERT INTO listings (title, description, location_id, price, listing_type, image_url, featured)
-SELECT
-  'Eliz Spa & Wellness',
-  'Haftalık kiralama, 4 kişilik suit oda, kahvaltı dahil.',
-  l.id,
-  22000.00,
-  'kiralama',
-  'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80',
-  true
-FROM locations l WHERE l.slug = 'eliz'
 ON CONFLICT DO NOTHING;

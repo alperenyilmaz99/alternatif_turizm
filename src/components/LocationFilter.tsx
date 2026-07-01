@@ -29,7 +29,7 @@ export default function LocationFilter({
         <button
           key={location.id}
           onClick={() => onSelect(location.slug)}
-          className={`rounded-xl border px-6 py-2.5 text-sm font-semibold uppercase tracking-wide transition-all duration-200 ${
+          className={`rounded-xl border px-6 py-2.5 text-sm font-semibold transition-all duration-200 ${
             activeSlug === location.slug
               ? "border-teal-600 bg-teal-600 text-white shadow-md shadow-teal-600/25"
               : "border-slate-200 bg-white text-slate-600 hover:border-teal-300 hover:text-teal-700"

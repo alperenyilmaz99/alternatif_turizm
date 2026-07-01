@@ -2,6 +2,7 @@ export interface Location {
   id: string;
   name: string;
   slug: string;
+  sort_order?: number;
 }
 
 export interface Listing {

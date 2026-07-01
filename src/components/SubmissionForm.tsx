@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 
-const LOCATIONS = ["Eliz", "Afyon", "Antalya", "Bodrum", "Diğer"];
+import { FORM_LOCATIONS } from "@/lib/locations";
 
 export default function SubmissionForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -101,7 +101,7 @@ export default function SubmissionForm() {
             className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
           >
             <option value="">Seçiniz</option>
-            {LOCATIONS.map((loc) => (
+            {FORM_LOCATIONS.map((loc) => (
               <option key={loc} value={loc}>
                 {loc}
               </option>

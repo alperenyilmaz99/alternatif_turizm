@@ -1,5 +1,6 @@
 import { createServerClient } from "@/lib/supabase/server";
 import { demoListings, demoLocations } from "@/lib/demo-data";
+import { sortLocations } from "@/lib/locations";
 import type { Listing, Location } from "@/types/database";
 
 export async function getLocations(): Promise<Location[]> {
@@ -9,10 +10,10 @@ export async function getLocations(): Promise<Location[]> {
   const { data, error } = await supabase
     .from("locations")
     .select("*")
-    .order("name");
+    .order("sort_order", { ascending: true });
 
   if (error || !data?.length) return demoLocations;
-  return data;
+  return sortLocations(data);
 }
 
 export async function getListings(): Promise<Listing[]> {

@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Alternatif Turizm Devremülk Merkezi
 
-## Getting Started
+Devremülk kiralama ve satış platformu. Next.js, Supabase ve Vercel ile geliştirilmiştir.
 
-First, run the development server:
+## Özellikler
+
+- Lokasyon bazlı ilan filtreleme (Eliz, Afyon, Antalya, Bodrum)
+- Öne çıkan devremülk ilanları (Fırsatlar bölümü)
+- Kullanıcı başvuru formu (kiralama/satış talepleri)
+- Supabase veritabanı entegrasyonu
+- Vercel'e tek tıkla deploy
+
+## Kurulum
+
+### 1. Bağımlılıkları yükleyin
+
+```bash
+npm install
+```
+
+### 2. Supabase projesi oluşturun
+
+1. [supabase.com](https://supabase.com) adresinde yeni proje oluşturun
+2. SQL Editor'da `supabase/schema.sql` dosyasını çalıştırın
+3. Project Settings > API bölümünden URL ve anon key'i alın
+
+### 3. Ortam değişkenlerini ayarlayın
+
+`.env.local.example` dosyasını `.env.local` olarak kopyalayın ve değerleri doldurun:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+```
+
+> Supabase yapılandırılmadan site demo verilerle çalışır.
+
+### 4. Geliştirme sunucusunu başlatın
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tarayıcıda [http://localhost:3000](http://localhost:3000) adresini açın.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Vercel'e Deploy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Projeyi GitHub'a push edin
+2. [vercel.com](https://vercel.com) üzerinde yeni proje oluşturun
+3. Environment Variables bölümüne Supabase anahtarlarını ekleyin:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+4. Deploy edin
 
-## Learn More
+## Veritabanı Tabloları
 
-To learn more about Next.js, take a look at the following resources:
+| Tablo | Açıklama |
+|-------|----------|
+| `locations` | Lokasyonlar (Eliz, Afyon vb.) |
+| `listings` | Devremülk ilanları |
+| `submissions` | Kullanıcı başvuruları |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Proje Yapısı
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/
+│   ├── api/submissions/   # Form API endpoint
+│   ├── page.tsx           # Ana sayfa
+│   └── layout.tsx
+├── components/
+│   ├── Header.tsx         # Site başlığı
+│   ├── LocationFilter.tsx # Lokasyon filtreleri
+│   ├── ListingCard.tsx    # İlan kartı
+│   ├── ListingsSection.tsx# Fırsatlar bölümü
+│   ├── SubmissionForm.tsx # Başvuru formu
+│   └── ContactSection.tsx # Form + görsel alanı
+├── lib/
+│   ├── supabase/          # Supabase client
+│   ├── data.ts            # Veri çekme fonksiyonları
+│   └── demo-data.ts       # Demo veriler
+└── types/
+    └── database.ts        # TypeScript tipleri
+```

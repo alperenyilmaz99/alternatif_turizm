@@ -10,7 +10,7 @@ export const demoLocations: Location[] = [
 export const demoListings: Listing[] = [
   {
     id: "1",
-    title: "Eliz Termal",
+    title: "Eliz Termal Kızılcahamam",
     description:
       "Kızılcahamam'da termal tatil imkanı. Spa, havuz ve konforlu konaklama seçenekleri.",
     location_id: "1",
@@ -24,7 +24,7 @@ export const demoListings: Listing[] = [
   },
   {
     id: "2",
-    title: "Narven Termal",
+    title: "Narven Termal Bolu",
     description:
       "Bolu'da doğayla iç içe termal tatil. Aileler için ideal devremülk seçenekleri.",
     location_id: "2",
@@ -38,7 +38,7 @@ export const demoListings: Listing[] = [
   },
   {
     id: "3",
-    title: "Özgül Termal",
+    title: "Özgül Termal Afyon",
     description:
       "Afyon'da kaplıca ve termal tedavi imkanlarıyla huzurlu bir tatil deneyimi.",
     location_id: "3",

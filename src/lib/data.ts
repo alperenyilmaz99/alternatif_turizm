@@ -3,6 +3,8 @@ import { demoListings, demoLocations } from "@/lib/demo-data";
 import { sortLocations } from "@/lib/locations";
 import type { Listing, Location } from "@/types/database";
 
+export const HOME_LISTINGS_LIMIT = 9;
+
 export async function getLocations(): Promise<Location[]> {
   const supabase = createServerClient();
   if (!supabase) return demoLocations;
@@ -16,16 +18,37 @@ export async function getLocations(): Promise<Location[]> {
   return sortLocations(data);
 }
 
-export async function getListings(): Promise<Listing[]> {
+export async function getListings(limit?: number): Promise<Listing[]> {
   const supabase = createServerClient();
-  if (!supabase) return demoListings;
+  if (!supabase) {
+    return limit ? demoListings.slice(0, limit) : demoListings;
+  }
 
-  const { data, error } = await supabase
+  let query = supabase
     .from("listings")
     .select("*, locations(*)")
-    .eq("featured", true)
     .order("created_at", { ascending: false });
 
-  if (error || !data?.length) return demoListings;
+  if (limit) {
+    query = query.limit(limit);
+  }
+
+  const { data, error } = await query;
+
+  if (error || !data?.length) {
+    return limit ? demoListings.slice(0, limit) : demoListings;
+  }
   return data as Listing[];
+}
+
+export async function getListingsCount(): Promise<number> {
+  const supabase = createServerClient();
+  if (!supabase) return demoListings.length;
+
+  const { count, error } = await supabase
+    .from("listings")
+    .select("*", { count: "exact", head: true });
+
+  if (error || count === null) return demoListings.length;
+  return count;
 }

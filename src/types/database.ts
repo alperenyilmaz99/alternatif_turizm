@@ -26,3 +26,22 @@ export interface Submission {
   listing_type: "kiralama" | "satış";
   description: string;
 }
+
+export interface SubmissionRecord {
+  id: string;
+  full_name: string;
+  phone: string;
+  email: string | null;
+  location: string;
+  listing_type: "kiralama" | "satış";
+  description: string;
+  created_at: string;
+}
+
+export interface AdminListing {
+  id: string;
+  title: string;
+  listing_type: "kiralama" | "satış";
+  created_at: string;
+  locations?: { name: string } | null;
+}

@@ -58,7 +58,7 @@ ON CONFLICT (slug) DO NOTHING;
 -- Örnek ilanlar
 INSERT INTO listings (title, description, location_id, listing_type, image_url, featured)
 SELECT
-  'Eliz Termal',
+  'Eliz Termal Kızılcahamam',
   'Kızılcahamam''da termal tatil imkanı. Spa, havuz ve konforlu konaklama seçenekleri.',
   l.id,
   'kiralama',
@@ -69,7 +69,7 @@ ON CONFLICT DO NOTHING;
 
 INSERT INTO listings (title, description, location_id, listing_type, image_url, featured)
 SELECT
-  'Narven Termal',
+  'Narven Termal Bolu',
   'Bolu''da doğayla iç içe termal tatil. Aileler için ideal devremülk seçenekleri.',
   l.id,
   'kiralama',
@@ -80,7 +80,7 @@ ON CONFLICT DO NOTHING;
 
 INSERT INTO listings (title, description, location_id, listing_type, image_url, featured)
 SELECT
-  'Özgül Termal',
+  'Özgül Termal Afyon',
   'Afyon''da kaplıca ve termal tedavi imkanlarıyla huzurlu bir tatil deneyimi.',
   l.id,
   'satış',

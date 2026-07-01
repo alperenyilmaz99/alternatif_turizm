@@ -3,9 +3,9 @@ import SubmissionForm from "./SubmissionForm";
 
 export default function ContactSection() {
   return (
-    <section className="w-full bg-slate-50 py-16">
+    <section className="w-full py-16">
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 lg:grid-cols-2 lg:gap-16">
-        <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+        <div className="rounded-2xl border border-white/60 bg-white/80 p-6 shadow-lg shadow-teal-900/5 backdrop-blur-sm sm:p-8">
           <h2 className="text-2xl font-bold text-slate-800">
             Devremülkünüzü Kiralayın veya Satın
           </h2>

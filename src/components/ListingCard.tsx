@@ -1,6 +1,7 @@
-import Image from "next/image";
 import type { Listing } from "@/types/database";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
+import { formatListingTypeLabel } from "@/lib/listings";
+import ListingImage from "./ListingImage";
 
 interface ListingCardProps {
   listing: Listing;
@@ -24,23 +25,9 @@ export default function ListingCard({ listing }: ListingCardProps) {
   const whatsappUrl = getWhatsAppUrl(listing);
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60">
+    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/70 bg-white/90 shadow-md shadow-teal-900/5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-900/10">
       <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-        {listing.image_url ? (
-          <Image
-            src={listing.image_url}
-            alt={listing.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 33vw"
-          />
-        ) : (
-          <div className="flex h-full items-center justify-center text-slate-400">
-            <svg className="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-          </div>
-        )}
+        <ListingImage src={listing.image_url} alt={listing.title} />
         <span
           className={`absolute left-3 top-3 rounded-lg px-3 py-1 text-xs font-bold uppercase tracking-wide ${
             listing.listing_type === "kiralama"
@@ -48,7 +35,7 @@ export default function ListingCard({ listing }: ListingCardProps) {
               : "bg-amber-500 text-white"
           }`}
         >
-          {listing.listing_type}
+          {formatListingTypeLabel(listing.listing_type)}
         </span>
       </div>
 

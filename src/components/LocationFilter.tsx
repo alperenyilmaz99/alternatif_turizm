@@ -20,7 +20,7 @@ export default function LocationFilter({
         className={`rounded-xl border px-6 py-2.5 text-sm font-semibold transition-all duration-200 ${
           activeSlug === null
             ? "border-teal-600 bg-teal-600 text-white shadow-md shadow-teal-600/25"
-            : "border-slate-200 bg-white text-slate-600 hover:border-teal-300 hover:text-teal-700"
+            : "border-white/70 bg-white/80 text-slate-600 backdrop-blur-sm hover:border-teal-300 hover:text-teal-700"
         }`}
       >
         Tümü
@@ -32,7 +32,7 @@ export default function LocationFilter({
           className={`rounded-xl border px-6 py-2.5 text-sm font-semibold transition-all duration-200 ${
             activeSlug === location.slug
               ? "border-teal-600 bg-teal-600 text-white shadow-md shadow-teal-600/25"
-              : "border-slate-200 bg-white text-slate-600 hover:border-teal-300 hover:text-teal-700"
+              : "border-white/70 bg-white/80 text-slate-600 backdrop-blur-sm hover:border-teal-300 hover:text-teal-700"
           }`}
         >
           {location.name}

@@ -40,3 +40,12 @@ export function getWhatsAppUrl(listing: Listing) {
   const message = `Merhaba, "${listing.title}" ilanı hakkında bilgi almak istiyorum.`;
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }
+
+export function formatPhoneDisplay(phone: string) {
+  const local = phone.startsWith("90") ? `0${phone.slice(2)}` : phone;
+  return `${local.slice(0, 4)} ${local.slice(4, 7)} ${local.slice(7)}`;
+}
+
+export function getCallUrl(listing: Listing) {
+  return `tel:+${getWhatsAppNumberForListing(listing)}`;
+}

@@ -7,7 +7,7 @@ interface ListingsGridProps {
 
 export default function ListingsGrid({ listings }: ListingsGridProps) {
   return (
-    <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="mt-10 grid grid-cols-3 gap-2 sm:gap-4 md:gap-6">
       {listings.map((listing) => (
         <ListingCard key={listing.id} listing={listing} />
       ))}

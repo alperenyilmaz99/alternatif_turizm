@@ -59,7 +59,7 @@ export default function ListingsCarousel({ listings }: ListingsCarouselProps) {
 
     const firstCard = el.querySelector<HTMLElement>("[data-listing-card]");
     const cardWidth = firstCard?.offsetWidth ?? 320;
-    const gap = 24;
+    const gap = el.clientWidth < 640 ? 8 : el.clientWidth < 768 ? 16 : 24;
     const amount = cardWidth + gap;
 
     el.scrollBy({
@@ -71,13 +71,13 @@ export default function ListingsCarousel({ listings }: ListingsCarouselProps) {
   const showArrows = canScrollLeft || canScrollRight;
 
   return (
-    <div className="mt-10 flex items-center gap-2 sm:gap-4">
+    <div className="mt-10 flex items-center gap-1 sm:gap-4">
       <button
         type="button"
         onClick={() => scroll("left")}
         disabled={!canScrollLeft}
         aria-label="Önceki ilanlar"
-        className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:border-teal-300 hover:text-teal-700 disabled:pointer-events-none disabled:opacity-0 sm:h-12 sm:w-12 ${
+        className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:border-teal-300 hover:text-teal-700 disabled:pointer-events-none disabled:opacity-0 sm:h-11 sm:w-11 md:h-12 md:w-12 ${
           showArrows ? "" : "hidden"
         }`}
       >
@@ -86,13 +86,13 @@ export default function ListingsCarousel({ listings }: ListingsCarouselProps) {
 
       <div
         ref={scrollRef}
-        className="scrollbar-hide flex flex-1 gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory"
+        className="scrollbar-hide flex flex-1 gap-2 overflow-x-auto scroll-smooth snap-x snap-mandatory sm:gap-4 md:gap-6"
       >
         {listings.map((listing) => (
           <div
             key={listing.id}
             data-listing-card
-            className="w-[85vw] flex-shrink-0 snap-start sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+            className="w-[calc(33.333%-0.35rem)] min-w-0 flex-shrink-0 snap-start sm:w-[calc(33.333%-0.7rem)] md:w-[calc(33.333%-1rem)]"
           >
             <ListingCard listing={listing} />
           </div>
@@ -104,7 +104,7 @@ export default function ListingsCarousel({ listings }: ListingsCarouselProps) {
         onClick={() => scroll("right")}
         disabled={!canScrollRight}
         aria-label="Sonraki ilanlar"
-        className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:border-teal-300 hover:text-teal-700 disabled:pointer-events-none disabled:opacity-0 sm:h-12 sm:w-12 ${
+        className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:border-teal-300 hover:text-teal-700 disabled:pointer-events-none disabled:opacity-0 sm:h-11 sm:w-11 md:h-12 md:w-12 ${
           showArrows ? "" : "hidden"
         }`}
       >

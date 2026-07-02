@@ -11,10 +11,6 @@ export const metadata: Metadata = {
   title: "Alternatif Turizm Devremülk Merkezi | Kiralama ve Satış",
   description:
     "Alternatif Turizm Devremülk Merkezi - devremülk kiralama ve satış. Eliz, Afyon ve daha fazlasında fırsat ilanları.",
-  icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
-  },
 };
 
 export default function RootLayout({

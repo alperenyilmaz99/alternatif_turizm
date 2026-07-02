@@ -10,7 +10,7 @@ interface ListingImageProps {
 
 function ImagePlaceholder({ large = false }: { large?: boolean }) {
   return (
-    <div className="flex h-full items-center justify-center text-slate-400">
+    <div className="absolute inset-0 flex h-full w-full items-center justify-center bg-slate-100 text-slate-400">
       <svg
         className={large ? "h-24 w-24" : "h-16 w-16"}
         fill="none"

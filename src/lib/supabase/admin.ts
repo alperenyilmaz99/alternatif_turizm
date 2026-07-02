@@ -10,5 +10,11 @@ export function createAdminClient() {
 
   return createClient(url, serviceKey, {
     auth: { persistSession: false, autoRefreshToken: false },
+    global: {
+      headers: {
+        apikey: serviceKey,
+        Authorization: `Bearer ${serviceKey}`,
+      },
+    },
   });
 }

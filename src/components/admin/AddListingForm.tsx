@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import type { Location } from "@/types/database";
+import ImageUploadField from "./ImageUploadField";
 
 interface AddListingFormProps {
   locations: Location[];
@@ -12,6 +13,7 @@ export default function AddListingForm({ locations, onSuccess }: AddListingFormP
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [error, setError] = useState("");
   const [successTitle, setSuccessTitle] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -26,7 +28,7 @@ export default function AddListingForm({ locations, onSuccess }: AddListingFormP
       description: (formData.get("description") as string) || undefined,
       location_id: formData.get("location_id") as string,
       listing_type: formData.get("listing_type") as "kiralama" | "satış",
-      image_url: (formData.get("image_url") as string) || undefined,
+      image_url: imageUrl.trim() || undefined,
     };
 
     try {
@@ -42,6 +44,7 @@ export default function AddListingForm({ locations, onSuccess }: AddListingFormP
       setStatus("success");
       setSuccessTitle(data.listing?.title ?? payload.title);
       form.reset();
+      setImageUrl("");
       onSuccess?.();
     } catch (err) {
       setStatus("error");
@@ -116,20 +119,8 @@ export default function AddListingForm({ locations, onSuccess }: AddListingFormP
       </div>
 
       <div>
-        <label htmlFor="image_url" className="mb-1.5 block text-sm font-medium text-slate-700">
-          Görsel URL
-        </label>
-        <input
-          id="image_url"
-          name="image_url"
-          type="url"
-          placeholder="https://images.unsplash.com/..."
-          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
-        />
-        <p className="mt-1.5 text-xs text-slate-400">
-          Doğrudan görsel linki yapıştırın. Unsplash sayfa linki değil,
-          images.unsplash.com ile biten link kullanın.
-        </p>
+        <p className="mb-1.5 text-sm font-medium text-slate-700">İlan Görseli</p>
+        <ImageUploadField value={imageUrl} onChange={setImageUrl} />
       </div>
 
       {status === "success" && (

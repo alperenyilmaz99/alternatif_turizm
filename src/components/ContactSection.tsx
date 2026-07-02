@@ -7,7 +7,7 @@ export default function ContactSection() {
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 lg:grid-cols-2 lg:gap-16">
         <div className="rounded-2xl border border-white/60 bg-white/80 p-6 shadow-lg shadow-teal-900/5 backdrop-blur-sm sm:p-8">
           <h2 className="text-2xl font-bold text-slate-800">
-            Devremülkünüzü Kiralayın veya Satın
+            Devremülk Kiralama-Satış Formu
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-slate-500">
             Kiralamak veya satmak istediğiniz devremülk bilgilerini formu

@@ -40,6 +40,8 @@ ALTER TABLE locations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE listings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE submissions ENABLE ROW LEVEL SECURITY;
 
+-- İlan görselleri: supabase/migration_storage.sql dosyasını da çalıştırın
+
 -- Herkes okuyabilir (ilanlar ve lokasyonlar)
 CREATE POLICY "Lokasyonlar herkese açık" ON locations FOR SELECT USING (true);
 CREATE POLICY "İlanlar herkese açık" ON listings FOR SELECT USING (true);

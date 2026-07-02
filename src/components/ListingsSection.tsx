@@ -4,13 +4,11 @@ import Link from "next/link";
 import { useState } from "react";
 import type { Listing, Location } from "@/types/database";
 import LocationFilter from "./LocationFilter";
-import ListingsCarousel from "./ListingsCarousel";
 import ListingsGrid from "./ListingsGrid";
 
 interface ListingsSectionProps {
   listings: Listing[];
   locations: Location[];
-  variant?: "carousel" | "grid";
   showAllButton?: boolean;
   title?: string;
   subtitle?: string;
@@ -19,7 +17,6 @@ interface ListingsSectionProps {
 export default function ListingsSection({
   listings,
   locations,
-  variant = "carousel",
   showAllButton = false,
   title = "Fırsatlar",
   subtitle = "Öne çıkan devremülk ilanlarımız",
@@ -45,11 +42,7 @@ export default function ListingsSection({
       <p className="mt-2 text-center text-slate-500">{subtitle}</p>
 
       {filtered.length > 0 ? (
-        variant === "carousel" ? (
-          <ListingsCarousel listings={filtered} />
-        ) : (
-          <ListingsGrid listings={filtered} />
-        )
+        <ListingsGrid listings={filtered} />
       ) : (
         <div className="mt-10 rounded-2xl border border-dashed border-slate-200 bg-slate-50 py-16 text-center">
           <p className="text-slate-500">

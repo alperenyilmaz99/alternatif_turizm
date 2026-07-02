@@ -33,12 +33,12 @@ export default function ListingCard({ listing }: ListingCardProps) {
     <>
       <article
         onClick={() => setIsOpen(true)}
-        className="group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border border-white/70 bg-white/90 shadow-md shadow-teal-900/5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-900/10 sm:rounded-2xl"
+        className="group relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-white/70 bg-white/90 pb-10 shadow-md shadow-teal-900/5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-900/10 sm:rounded-2xl sm:pb-12"
       >
-        <div className="relative aspect-[4/3] shrink-0 overflow-hidden bg-slate-100">
+        <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-slate-100">
           <ListingImage src={listing.image_url} alt={listing.title} />
           <span
-            className={`absolute left-1.5 top-1.5 rounded-md px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide sm:left-3 sm:top-3 sm:rounded-lg sm:px-3 sm:py-1 sm:text-xs ${
+            className={`absolute left-1.5 top-1.5 z-10 rounded-md px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide sm:left-3 sm:top-3 sm:rounded-lg sm:px-3 sm:py-1 sm:text-xs ${
               listing.listing_type === "kiralama"
                 ? "bg-blue-600 text-white"
                 : "bg-amber-500 text-white"
@@ -48,14 +48,14 @@ export default function ListingCard({ listing }: ListingCardProps) {
           </span>
         </div>
 
-        <div className="flex flex-1 flex-col p-2.5 pr-10 pb-10 sm:p-5 sm:pr-16 sm:pb-14">
-          <p className="shrink-0 text-[10px] font-semibold uppercase tracking-wider text-teal-600 sm:text-xs">
+        <div className="flex h-[5.75rem] shrink-0 flex-col overflow-hidden p-2.5 pr-10 sm:h-[7.75rem] sm:p-5 sm:pr-16">
+          <p className="shrink-0 truncate text-[10px] font-semibold uppercase tracking-wider text-teal-600 sm:text-xs">
             {locationName}
           </p>
-          <h3 className="mt-0.5 min-h-[2.5em] text-xs font-bold text-slate-800 line-clamp-2 sm:mt-1 sm:min-h-[3.25rem] sm:text-lg">
+          <h3 className="mt-0.5 h-[2.5em] shrink-0 overflow-hidden text-xs font-bold leading-tight text-slate-800 line-clamp-2 sm:mt-1 sm:text-base">
             {listing.title}
           </h3>
-          <p className="mt-1 min-h-[2.5em] flex-1 text-[10px] leading-relaxed text-slate-500 line-clamp-2 sm:mt-2 sm:min-h-[2.75rem] sm:text-sm">
+          <p className="mt-1 h-[2.5em] shrink-0 overflow-hidden text-[10px] leading-tight text-slate-500 line-clamp-2 sm:mt-2 sm:h-[2.75em] sm:text-sm">
             {listing.description || "\u00A0"}
           </p>
         </div>

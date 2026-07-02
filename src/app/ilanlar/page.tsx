@@ -32,7 +32,6 @@ export default async function AllListingsPage() {
           <ListingsSection
             listings={listings}
             locations={locations}
-            variant="grid"
             title="Tüm İlanlar"
             subtitle={`Toplam ${listings.length} ilan listeleniyor`}
           />

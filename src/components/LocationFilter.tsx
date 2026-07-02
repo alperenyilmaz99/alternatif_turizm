@@ -27,7 +27,7 @@ export default function LocationFilter({
             : "border-white/70 bg-white/80 text-slate-600 backdrop-blur-sm hover:border-teal-300 hover:text-teal-700"
         }`}
       >
-        Tümü({totalCount})
+        Tümü ({totalCount})
       </button>
       {locations.map((location) => (
         <button
@@ -39,7 +39,7 @@ export default function LocationFilter({
               : "border-white/70 bg-white/80 text-slate-600 backdrop-blur-sm hover:border-teal-300 hover:text-teal-700"
           }`}
         >
-          {location.name}({countsBySlug[location.slug] ?? 0})
+          {location.name} ({countsBySlug[location.slug] ?? 0})
         </button>
       ))}
     </nav>

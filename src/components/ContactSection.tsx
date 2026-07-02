@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ContactInfo from "./ContactInfo";
 import SubmissionForm from "./SubmissionForm";
 
 export default function ContactSection() {
@@ -14,6 +15,7 @@ export default function ContactSection() {
             doldurarak bize gönderin. Uzman ekibimiz en kısa sürede sizinle
             iletişime geçecektir.
           </p>
+          <ContactInfo className="mt-6" />
           <div className="mt-8">
             <SubmissionForm />
           </div>
@@ -21,8 +23,8 @@ export default function ContactSection() {
 
         <div className="relative hidden aspect-[4/5] overflow-hidden rounded-2xl shadow-xl lg:block">
           <Image
-            src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=800&q=80"
-            alt="Lüks otel ve termal tatil"
+            src="/contact-hero.png"
+            alt="Doğada şifalı su ve huzurlu tatil"
             fill
             className="object-cover"
             sizes="50vw"
@@ -30,9 +32,6 @@ export default function ContactSection() {
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
           <div className="absolute bottom-6 left-6 right-6">
             <p className="text-lg font-semibold text-white">
-              Hayalinizdeki tatili paylaşın
-            </p>
-            <p className="mt-1 text-sm text-white/80">
               Binlerce kişiye ulaşın, devremülkünüzü kolayca değerlendirin.
             </p>
           </div>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import ListingsSection from "@/components/ListingsSection";
 import PageShell from "@/components/PageShell";
+import SiteFooter from "@/components/SiteFooter";
 import { getListings, getLocations } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -36,9 +37,7 @@ export default async function AllListingsPage() {
             subtitle={`Toplam ${listings.length} ilan listeleniyor`}
           />
         </div>
-        <footer className="border-t border-white/40 bg-white/50 py-6 text-center text-sm text-slate-500 backdrop-blur-sm">
-          © {new Date().getFullYear()} Alternatif Turizm Devremülk Merkezi. Tüm hakları saklıdır.
-        </footer>
+        <SiteFooter />
       </div>
     </PageShell>
   );

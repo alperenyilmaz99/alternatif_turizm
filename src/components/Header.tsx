@@ -13,7 +13,7 @@ export default function Header({ siteName = "Alternatif Turizm Devremülk Merkez
       </h1>
       </Link>
       <p className="mt-3 text-base text-teal-800/70 sm:text-lg">
-        Devremülk kiralama ve satış platformu
+        Devremülk Kiralama & Satış Platformu
       </p>
     </header>
   );

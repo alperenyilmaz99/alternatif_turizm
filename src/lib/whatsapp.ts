@@ -1,7 +1,5 @@
 import type { Listing } from "@/types/database";
-
-const WHATSAPP_KIZILCA_HAMAM = "905441052626";
-const WHATSAPP_DEFAULT = "905559985198";
+import { DEFAULT_PHONE, KIZILCAHAMAM_PHONE } from "@/lib/contacts";
 
 function normalizeText(text: string) {
   return text
@@ -31,8 +29,8 @@ export function isKizilcaHamamListing(listing: Listing) {
 
 export function getWhatsAppNumberForListing(listing: Listing) {
   return isKizilcaHamamListing(listing)
-    ? WHATSAPP_KIZILCA_HAMAM
-    : WHATSAPP_DEFAULT;
+    ? KIZILCAHAMAM_PHONE
+    : DEFAULT_PHONE;
 }
 
 export function getWhatsAppUrl(listing: Listing) {

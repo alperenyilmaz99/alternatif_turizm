@@ -6,12 +6,16 @@ interface LocationFilterProps {
   locations: Location[];
   activeSlug: string | null;
   onSelect: (slug: string | null) => void;
+  totalCount: number;
+  countsBySlug: Record<string, number>;
 }
 
 export default function LocationFilter({
   locations,
   activeSlug,
   onSelect,
+  totalCount,
+  countsBySlug,
 }: LocationFilterProps) {
   return (
     <nav className="flex flex-wrap items-center justify-center gap-3 px-4">
@@ -23,7 +27,7 @@ export default function LocationFilter({
             : "border-white/70 bg-white/80 text-slate-600 backdrop-blur-sm hover:border-teal-300 hover:text-teal-700"
         }`}
       >
-        Tümü
+        Tümü({totalCount})
       </button>
       {locations.map((location) => (
         <button
@@ -35,7 +39,7 @@ export default function LocationFilter({
               : "border-white/70 bg-white/80 text-slate-600 backdrop-blur-sm hover:border-teal-300 hover:text-teal-700"
           }`}
         >
-          {location.name}
+          {location.name}({countsBySlug[location.slug] ?? 0})
         </button>
       ))}
     </nav>

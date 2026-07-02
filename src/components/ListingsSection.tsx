@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { Listing, Location } from "@/types/database";
 import LocationFilter from "./LocationFilter";
 import ListingsGrid from "./ListingsGrid";
@@ -23,6 +23,15 @@ export default function ListingsSection({
 }: ListingsSectionProps) {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
 
+  const countsBySlug = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const listing of listings) {
+      const slug = listing.locations?.slug;
+      if (slug) counts[slug] = (counts[slug] ?? 0) + 1;
+    }
+    return counts;
+  }, [listings]);
+
   const filtered =
     activeSlug === null
       ? listings
@@ -34,6 +43,8 @@ export default function ListingsSection({
         locations={locations}
         activeSlug={activeSlug}
         onSelect={setActiveSlug}
+        totalCount={listings.length}
+        countsBySlug={countsBySlug}
       />
 
       <h2 className="mt-12 text-center text-2xl font-bold tracking-tight text-slate-800 sm:text-3xl">

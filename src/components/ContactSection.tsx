@@ -11,8 +11,8 @@ export default function ContactSection() {
             Devremülk Kiralama-Satış Formu
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-slate-500">
-            Kiralamak veya satmak istediğiniz devremülk bilgilerini formu
-            doldurarak bize gönderin. Uzman ekibimiz en kısa sürede sizinle
+            Kiraya vermek yada satmak istediğiniz devremülklerinizi form
+            doldurarak bize gönderiniz. Uzman ekibimiz en kısa sürede sizinle
             iletişime geçecektir.
           </p>
           <ContactInfo className="mt-6" />

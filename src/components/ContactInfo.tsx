@@ -45,7 +45,7 @@ export default function ContactInfo({
               <a
                 href={getWhatsAppUrlForPhone(
                   contact.phoneE164,
-                  "Merhaba, devremülk ilanlarınız hakkında bilgi almak istiyorum."
+                  "Merhaba devremülk alım satım yapıyor musunuz ?"
                 )}
                 target="_blank"
                 rel="noopener noreferrer"

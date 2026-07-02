@@ -1,18 +1,20 @@
+import Image from "next/image";
 import Link from "next/link";
 
-interface HeaderProps {
-  siteName?: string;
-}
-
-export default function Header({ siteName = "Alternatif Turizm Devremülk Merkezi" }: HeaderProps) {
+export default function Header() {
   return (
-    <header className="w-full py-10 text-center">
-      <Link href="/" className="inline-block">
-      <h1 className="text-3xl font-bold tracking-tight text-slate-800 transition hover:text-teal-700 sm:text-4xl md:text-5xl">
-        {siteName}
-      </h1>
+    <header className="w-full py-8 text-center sm:py-10">
+      <Link href="/" className="inline-block transition hover:opacity-90">
+        <Image
+          src="/logo.png"
+          alt="Alternatif Turizm Devremülk Merkezi"
+          width={941}
+          height={604}
+          priority
+          className="mx-auto h-auto w-[min(100%,320px)] bg-transparent sm:w-[min(100%,380px)] md:w-[420px]"
+        />
       </Link>
-      <p className="mt-3 text-base text-teal-800/70 sm:text-lg">
+      <p className="mt-4 text-base text-teal-800/80 sm:mt-5 sm:text-lg">
         Devremülk Kiralama & Satış Platformu
       </p>
     </header>

@@ -6,6 +6,8 @@ import PageShell from "@/components/PageShell";
 import SiteFooter from "@/components/SiteFooter";
 import { getListings, getLocations } from "@/lib/data";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Tüm İlanlar | Alternatif Turizm Devremülk Merkezi",
   description: "Tüm devremülk kiralama ve satış ilanlarımız.",

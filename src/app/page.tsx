@@ -10,6 +10,8 @@ import {
   HOME_LISTINGS_LIMIT,
 } from "@/lib/data";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const [listings, locations, totalCount] = await Promise.all([
     getListings(HOME_LISTINGS_LIMIT),

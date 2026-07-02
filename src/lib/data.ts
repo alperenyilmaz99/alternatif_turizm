@@ -14,7 +14,11 @@ export async function getLocations(): Promise<Location[]> {
     .select("*")
     .order("sort_order", { ascending: true });
 
-  if (error || !data?.length) return demoLocations;
+  if (error) {
+    console.error("getLocations error:", error);
+    return [];
+  }
+  if (!data?.length) return demoLocations;
   return sortLocations(data);
 }
 
@@ -35,10 +39,11 @@ export async function getListings(limit?: number): Promise<Listing[]> {
 
   const { data, error } = await query;
 
-  if (error || !data?.length) {
-    return limit ? demoListings.slice(0, limit) : demoListings;
+  if (error) {
+    console.error("getListings error:", error);
+    return [];
   }
-  return data as Listing[];
+  return (data ?? []) as Listing[];
 }
 
 export async function getListingsCount(): Promise<number> {
@@ -49,6 +54,9 @@ export async function getListingsCount(): Promise<number> {
     .from("listings")
     .select("*", { count: "exact", head: true });
 
-  if (error || count === null) return demoListings.length;
-  return count;
+  if (error) {
+    console.error("getListingsCount error:", error);
+    return 0;
+  }
+  return count ?? 0;
 }

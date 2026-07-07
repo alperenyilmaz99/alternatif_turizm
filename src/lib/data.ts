@@ -60,3 +60,30 @@ export async function getListingsCount(): Promise<number> {
   }
   return count ?? 0;
 }
+
+export async function getListingCountsBySlug(): Promise<Record<string, number>> {
+  const supabase = createServerClient();
+  if (!supabase) {
+    const counts: Record<string, number> = {};
+    for (const listing of demoListings) {
+      const slug = listing.locations?.slug;
+      if (slug) counts[slug] = (counts[slug] ?? 0) + 1;
+    }
+    return counts;
+  }
+
+  const { data, error } = await supabase.from("listings").select("locations(slug)");
+
+  if (error) {
+    console.error("getListingCountsBySlug error:", error);
+    return {};
+  }
+
+  const counts: Record<string, number> = {};
+  for (const row of data ?? []) {
+    const location = row.locations as { slug?: string } | { slug?: string }[] | null;
+    const slug = Array.isArray(location) ? location[0]?.slug : location?.slug;
+    if (slug) counts[slug] = (counts[slug] ?? 0) + 1;
+  }
+  return counts;
+}

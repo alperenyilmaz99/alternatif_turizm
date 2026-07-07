@@ -4,6 +4,7 @@ import ContactSection from "@/components/ContactSection";
 import PageShell from "@/components/PageShell";
 import SiteFooter from "@/components/SiteFooter";
 import {
+  getListingCountsBySlug,
   getListings,
   getListingsCount,
   getLocations,
@@ -13,10 +14,11 @@ import {
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [listings, locations, totalCount] = await Promise.all([
+  const [listings, locations, totalCount, countsBySlug] = await Promise.all([
     getListings(HOME_LISTINGS_LIMIT),
     getLocations(),
     getListingsCount(),
+    getListingCountsBySlug(),
   ]);
 
   return (
@@ -27,6 +29,8 @@ export default async function Home() {
           <ListingsSection
             listings={listings}
             locations={locations}
+            totalCount={totalCount}
+            countsBySlug={countsBySlug}
             showAllButton={totalCount > HOME_LISTINGS_LIMIT}
           />
         </div>

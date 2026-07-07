@@ -9,6 +9,8 @@ import ListingsGrid from "./ListingsGrid";
 interface ListingsSectionProps {
   listings: Listing[];
   locations: Location[];
+  totalCount?: number;
+  countsBySlug?: Record<string, number>;
   showAllButton?: boolean;
   title?: string;
   subtitle?: string;
@@ -17,13 +19,15 @@ interface ListingsSectionProps {
 export default function ListingsSection({
   listings,
   locations,
+  totalCount,
+  countsBySlug: countsBySlugProp,
   showAllButton = false,
   title = "Fırsatlar",
   subtitle = "Öne çıkan devremülk ilanlarımız",
 }: ListingsSectionProps) {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
 
-  const countsBySlug = useMemo(() => {
+  const countsFromListings = useMemo(() => {
     const counts: Record<string, number> = {};
     for (const listing of listings) {
       const slug = listing.locations?.slug;
@@ -31,6 +35,9 @@ export default function ListingsSection({
     }
     return counts;
   }, [listings]);
+
+  const displayTotal = totalCount ?? listings.length;
+  const displayCounts = countsBySlugProp ?? countsFromListings;
 
   const filtered =
     activeSlug === null
@@ -43,8 +50,8 @@ export default function ListingsSection({
         locations={locations}
         activeSlug={activeSlug}
         onSelect={setActiveSlug}
-        totalCount={listings.length}
-        countsBySlug={countsBySlug}
+        totalCount={displayTotal}
+        countsBySlug={displayCounts}
       />
 
       <h2 className="mt-12 text-center text-2xl font-bold tracking-tight text-slate-800 sm:text-3xl">

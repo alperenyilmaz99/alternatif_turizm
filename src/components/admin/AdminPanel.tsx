@@ -156,7 +156,9 @@ export default function AdminPanel({ locations }: AdminPanelProps) {
         />
       )}
 
-      {activeTab === "listings" && <ManageListings key={listingsKey} />}
+      {activeTab === "listings" && (
+        <ManageListings key={listingsKey} locations={locations} />
+      )}
 
       {activeTab === "submissions" && <SubmissionsList />}
 
